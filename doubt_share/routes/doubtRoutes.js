@@ -23,8 +23,9 @@ router.post('/add',authMiddleware, async (req, res) => {
 
 router.get('/all-doubts' ,authMiddleware, async (req , res)=>{
     try {
-        const doubts = await Doubt.find({})
-          .sort({ timestamp: -1 })
+        const studentId = req.body.userId
+        const doubts = await Doubt.find({ student : studentId})
+          .sort( {createdAt : -1})
           .exec();
         res.json(doubts);
     } catch (error) {

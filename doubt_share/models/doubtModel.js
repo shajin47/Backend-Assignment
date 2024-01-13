@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb')
 const mongoose = require('mongoose')
 
 const doubtSchema = new mongoose.Schema({
@@ -9,7 +10,7 @@ const doubtSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     }
-})
+}, { timestamps : true });
  
 
 module.exports = mongoose.model('doubts' , doubtSchema ) 
