@@ -1,25 +1,9 @@
 const router = require('express').Router()
-const bcrypt = require('bcrypt')
 const Doubt = require('../models/doubtModel');
-const jwt = require('jsonwebtoken')
 const authMiddleware = require('../middlewares/authMiddleware')
 
 
-//resgiter a user
-
-router.post('/add',authMiddleware, async (req, res) => {
-    try {
-        const newDoubt = new Doubt(req.body)
-        await newDoubt.save()
-
-        res.send({ success: true, message: "New doubt has been created!" });
-
-    } catch (error) {
-        console.log(error) 
-    }
-})
-
-//login Routes
+//all-doubts
 
 router.get('/all-doubts' ,authMiddleware, async (req , res)=>{
     try {
@@ -33,6 +17,21 @@ router.get('/all-doubts' ,authMiddleware, async (req , res)=>{
     res.status(500).json({ error: 'Internal Server Error' });
     }
 })
+
+//add doubts
+
+router.post('/add',authMiddleware, async (req, res) => {
+    try {
+        const newDoubt = new Doubt(req.body)
+        await newDoubt.save()
+
+        res.send({ success: true, message: "New doubt has been created!" });
+
+    } catch (error) {
+        console.log(error) 
+    }
+})
+
 
 
 module.exports = router
