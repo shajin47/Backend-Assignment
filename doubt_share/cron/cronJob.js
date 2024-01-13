@@ -1,4 +1,5 @@
 const axios = require('axios');
+const cron = require('node-cron');
 
 // Function to count real-time available tutors
 const countAvailableTutors = async () => {
@@ -13,8 +14,6 @@ const countAvailableTutors = async () => {
 };
 
 // CRON job to run every second
-const cronJob = setInterval(() => {
+cron.schedule('* * * * * *', () => {
   countAvailableTutors();
-}, 1000);
-
-
+});
